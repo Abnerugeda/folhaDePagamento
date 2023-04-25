@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "RWcHgjqHwvqs3kJLBhzNj+FEOJV7frg2DOkNWwaQY+fWy8/YHPofiKfDI7UvSXlnNV6qIy5yV7lYamLmSAknig==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\abner\\OneDrive\\Área de Trabalho\\Pim\\folhaDePagamento\\folhaDePagamento\\folhaDePagamento.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\abner\\.nuget\\packages\\fontawesome.sharp\\6.3.0\\fontawesome.sharp.6.3.0.nupkg.sha512"
+  ],
+  "logs": []
+}
