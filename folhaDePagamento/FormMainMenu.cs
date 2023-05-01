@@ -1,4 +1,6 @@
 
+using folhaDePagamento.Forms;
+using folhaDePagamento.services;
 using FontAwesome.Sharp;
 namespace folhaDePagamento
 {
@@ -6,6 +8,8 @@ namespace folhaDePagamento
     {
         private IconButton currentBtn;
         private Panel leftBorderBtn;
+        private Form currentChildForm;
+       
         public FormMainMenu()
         {
 
@@ -13,6 +17,7 @@ namespace folhaDePagamento
             leftBorderBtn = new Panel();
             leftBorderBtn.Size = new Size(7, 60);
             panelMenu.Controls.Add(leftBorderBtn);
+
         }
         private struct RGBcolors
         {
@@ -41,6 +46,8 @@ namespace folhaDePagamento
                 leftBorderBtn.Location = new Point(0, currentBtn.Location.Y);
                 leftBorderBtn.Visible = true;
                 leftBorderBtn.BringToFront();
+                iconHome.IconChar = currentBtn.IconChar;
+                iconHome.IconColor = color;
             }
         }
         private void DesativarBotao()
@@ -53,6 +60,8 @@ namespace folhaDePagamento
                 currentBtn.IconColor = Color.Gainsboro;
                 currentBtn.TextImageRelation = TextImageRelation.ImageBeforeText;
                 currentBtn.ImageAlign = ContentAlignment.MiddleLeft;
+                iconHome.IconChar = IconChar.Home;
+                iconHome.IconColor = Color.MediumPurple;
             }
         }
         private void panel1_Paint(object sender, PaintEventArgs e)
@@ -60,15 +69,76 @@ namespace folhaDePagamento
 
         }
 
+        private void iconButton1_Click_1(object sender, EventArgs e)
+        {
+            AtivarBotao(sender, RGBcolors.color1);
+            abrirChildForm(new FormDashboard());
+        }
+
+        private void iconButton2_Click(object sender, EventArgs e)
+        {
+            AtivarBotao(sender, RGBcolors.color2);
+            abrirChildForm(new FormFolha());
+        }
+
+        private void iconButton3_Click(object sender, EventArgs e)
+        {
+            AtivarBotao(sender, RGBcolors.color3);
+            abrirChildForm(new FormFuncionarios());
+        }
         private void iconButton4_Click(object sender, EventArgs e)
         {
             AtivarBotao(sender, RGBcolors.color4);
+            abrirChildForm(new FormConfiguracoes());
         }
-        private void iconButton1_Click(object sender, EventArgs e)
+
+        private void iconButton5_Click(object sender, EventArgs e)
         {
-            AtivarBotao(sender, RGBcolors.color1);
+            AtivarBotao(sender, RGBcolors.color5);
+            abrirChildForm(new FormSuporte());
         }
 
+        private void iconPictureBox1_Click(object sender, EventArgs e)
+        {
+            reset();
+        }
+        private void reset()
+        {
+            DesativarBotao();
+            leftBorderBtn.Visible = false;
+            currentChildForm.Close();
+        }
 
+        private void abrirChildForm(Form childForm)
+        {
+            if(currentChildForm != null)
+            {
+                currentChildForm.Close();
+            }
+            currentChildForm = childForm;
+            childForm.TopLevel = false;
+            childForm.FormBorderStyle = FormBorderStyle.None;
+            childForm.Dock = DockStyle.Fill;
+            panelDesktop.Controls.Add(childForm);
+            panelDesktop.Tag = childForm;
+            childForm.BringToFront();
+            childForm.Show();
+            lblHome.Text = childForm.Text;
+        }
+        private void panelDesktop_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void label1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void timerNow_Tick(object sender, EventArgs e)
+        {
+            lblHorario.Text = DateTime.Now.ToString("HH:mm:ss");
+            lblData.Text = DateTime.Now.ToLongDateString();
+        }
     }
 }

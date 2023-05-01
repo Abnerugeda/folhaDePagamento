@@ -4,5 +4,26 @@
     <Compile Update="FormMainMenu.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Update="Forms\AdicionarFuncionario.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Forms\FormConfiguracoes.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Forms\FormDashboard.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Forms\FormFolha.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Forms\FormFuncionarios.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Forms\FormLogin.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Forms\FormSuporte.cs">
+      <SubType>Form</SubType>
+    </Compile>
   </ItemGroup>
 </Project>
