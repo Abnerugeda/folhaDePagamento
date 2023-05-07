@@ -34,7 +34,6 @@ namespace folhaDePagamento.services
 
         public void insertDataFunc(
             string nome,
-            string id,
             string email,
             string cpf,
             string telefone,
@@ -52,43 +51,98 @@ namespace folhaDePagamento.services
             string estadoCivil,
             string nivelAcess,
             string pis,
-            string dataAdmissao
+            string dataAdmissao,
+            string salario,
+            string ddd
             )
         {
             try
             {
 
                 MySqlCommand comm = connect().CreateCommand();
-                comm.CommandText = $"INSERT INTO funcionario VALUES(@IDFUNCIONARIO, @NIVELACESSO, @NOME, @CPF, @RG, @NIS, @PIS, @LOGRADOURO, @BAIRRO, @NUMERO, @COMPLEMENTO, @CIDADE, @UF, @GENERO, @DATA_NASCI, @TELEFONERESIDENCIAL, @TELEFONECELULAR, @DD, @ESTADO_CIVIL, @CEP, @EMAIL, @ATIVO, @DATA_ADMISSAO)";
-                comm.Parameters.AddWithValue("@IDFUNCIONARIO", id);
+                comm.CommandText = $"INSERT INTO funcionario VALUES(DEFAULT, @NIVELACESSO, @NOME, @CPF, @RG, @PIS, @GENERO, @DATA_NASCI, @ESTADO_CIVIL, @EMAIL, @ATIVO, @DATA_ADMISSAO);";
                 comm.Parameters.AddWithValue("@NIVELACESSO", nivelAcess);
                 comm.Parameters.AddWithValue("@NOME", nome);
                 comm.Parameters.AddWithValue("@CPF", cpf);
-                comm.Parameters.AddWithValue("RG", rg);
-                comm.Parameters.AddWithValue("@NIS", null);
+                comm.Parameters.AddWithValue("@RG", rg);
                 comm.Parameters.AddWithValue("@PIS", pis);
-                comm.Parameters.AddWithValue("@LOGRADOURO", logradouro);
-                comm.Parameters.AddWithValue("@BAIRRO", bairro);
-                comm.Parameters.AddWithValue("@NUMERO", numero);
-                comm.Parameters.AddWithValue("@COMPLEMENTO", complemento);
-                comm.Parameters.AddWithValue("@CIDADE", municipio);
-                comm.Parameters.AddWithValue("@UF", uf);
                 comm.Parameters.AddWithValue("@GENERO", genero);
                 comm.Parameters.AddWithValue("@DATA_NASCI", data);
-                comm.Parameters.AddWithValue("@TELEFONERESIDENCIAL", telefoneRes);
-                comm.Parameters.AddWithValue("@TELEFONECELULAR", telefone);
-                comm.Parameters.AddWithValue("@DD", "16");
                 comm.Parameters.AddWithValue("@ESTADO_CIVIL", estadoCivil);
-                comm.Parameters.AddWithValue("@CEP", cep);
                 comm.Parameters.AddWithValue("@EMAIL", email);
                 comm.Parameters.AddWithValue("@ATIVO", "1");
                 comm.Parameters.AddWithValue("@DATA_ADMISSAO", dataAdmissao);
                 comm.ExecuteNonQuery();
+                insertSalario(salario, cpf, dataAdmissao);
+                insertTelefoneCelular(ddd, telefone, cpf);
+                if(telefoneRes != null)insertTelefoneResi(ddd, telefoneRes, cpf);
+                insertEndereco(cep, logradouro, numero, uf, complemento, bairro, cpf, municipio);
             }catch(Exception ex)
             {
                 MessageBox.Show($"Ocorreu um erro na hora de cadastrar, revise as informações e tente novamente! {ex}");
             }
          
+        }
+        public void insertTelefoneCelular(string ddd, string telefone, string cpf)
+        {
+            MySqlCommand comm = connect().CreateCommand();
+            comm.CommandText = "INSERT INTO telefoneCelular (IDFUNCIONARIO, DDD, NUMERO) VALUES (@IDFUNCIONARIO, @DDD, @NUMERO);";
+            comm.Parameters.AddWithValue("@IDFUNCIONARIO", queryIdFunc(cpf));
+            comm.Parameters.AddWithValue("@DDD", ddd);
+            comm.Parameters.AddWithValue("@NUMERO", telefone);
+            comm.ExecuteNonQuery();
+        }
+        public void insertTelefoneResi(string ddd, string telefone, string cpf)
+        {
+            MySqlCommand comm = connect().CreateCommand();
+            comm.CommandText = "INSERT INTO telefoneResidencial (IDFUNCIONARIO, DDD, NUMERO) VALUES (@IDFUNCIONARIO, @DDD, @NUMERO);";
+            comm.Parameters.AddWithValue("@IDFUNCIONARIO", queryIdFunc(cpf));
+            comm.Parameters.AddWithValue("@DDD", ddd);
+            comm.Parameters.AddWithValue("@NUMERO", telefone);
+            comm.ExecuteNonQuery();
+        }
+        public void insertEndereco(string cep, string logradouro, string numero, string uf, string complemento, string bairro, string cpf, string municipio)
+        {
+            MySqlCommand comm = connect().CreateCommand();
+            comm.CommandText = "INSERT INTO endereco (IDFUNCIONARIO, LOGRADOURO, NUMERO, CEP, UF, BAIRRO, COMPLEMENTO, MUNICIPIO) VALUES (@IDFUNCIONARIO, @LOGRADOURO, @NUMERO, @CEP, @UF, @BAIRRO, @COMPLEMENTO, @MUNICIPIO);";
+            comm.Parameters.AddWithValue("@IDFUNCIONARIO", queryIdFunc(cpf));
+            comm.Parameters.AddWithValue("@LOGRADOURO", logradouro);
+            comm.Parameters.AddWithValue("@BAIRRO", bairro);
+            comm.Parameters.AddWithValue("@NUMERO", numero);
+            comm.Parameters.AddWithValue("@COMPLEMENTO", complemento);
+            comm.Parameters.AddWithValue("@MUNICIPIO", municipio);
+            comm.Parameters.AddWithValue("@UF", uf);
+            comm.Parameters.AddWithValue("CEP", cep);
+            comm.ExecuteNonQuery();
+        }
+        public void insertSalario(string salario, string cpf, string dataAdmissao)
+        {
+            try
+            {
+                MySqlCommand comm = connect().CreateCommand();
+                comm.CommandText = "INSERT INTO SALARIO VALUES(DEFAULT, @IDFUNCIONARIO, @SALARIO, @DATA_SALARIO);";
+                comm.Parameters.AddWithValue("@IDFUNCIONARIO", queryIdFunc(cpf));
+                comm.Parameters.AddWithValue("@SALARIO", salario);
+                comm.Parameters.AddWithValue("DATA_SALARIO", dataAdmissao);
+                comm.ExecuteNonQuery();
+            }
+            catch(Exception e)
+            {
+                MessageBox.Show($"Ocorreu um erro, tente novamente. {e}");
+
+            }
+        }
+        public string queryIdFunc(string cpf)
+        {
+            MySqlCommand sqlCommand = new MySqlCommand("SELECT * FROM funcionario WHERE CPF = @CPF", connect());
+            sqlCommand.Parameters.AddWithValue("@CPF", cpf);
+            MySqlDataReader reader = sqlCommand.ExecuteReader();
+            while (reader.Read())
+            {
+                return reader["IDFUNCIONARIO"].ToString();
+                
+            }
+            return null;
         }
         public List<ListFuncionarios> queryFunc()
         {
@@ -97,10 +151,10 @@ namespace folhaDePagamento.services
                 MySqlCommand sqlCommand = new MySqlCommand("SELECT * FROM funcionario", connect());
                 MySqlDataReader reader = sqlCommand.ExecuteReader();
                 var listFuncionarios = new List<ListFuncionarios>();
-
+                
                 while (reader.Read())
                 {
-                    if (reader["ATIVO"].ToString() == "1")
+                    if (reader["ATIVO"].Equals(true))
                     {
                         listFuncionarios.Add(new ListFuncionarios(reader["IDFUNCIONARIO"].ToString(), reader["NOME"].ToString(), reader["NIVELACESSO"].ToString(), reader["CPF"].ToString(), reader["DATA_ADMISSAO"].ToString()));
                     }

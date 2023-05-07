@@ -71,7 +71,7 @@ namespace folhaDePagamento.Forms
             }
         
         }
-        private double calculoFgts(double salarioBruto)
+        private double calculoInss(double salarioBruto)
         {
             if(salarioBruto < 1302.00){
                 return salarioBruto * 0.75;
@@ -92,7 +92,7 @@ namespace folhaDePagamento.Forms
         {
 
             double salario = double.Parse(boxSalario.Text);
-            double fgts = calculoFgts(salario);
+            double fgts = calculoInss(salario);
             PopularDataGrip(salario, fgts, 0);           
 
         }

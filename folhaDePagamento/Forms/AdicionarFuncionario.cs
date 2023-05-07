@@ -42,7 +42,8 @@ namespace folhaDePagamento.Forms
                     boxEmail.Text       != null ||
                     boxEstadoCivil.Text != null ||
                     boxGenero.Text      != null ||
-                    boxId.Text          != null ||
+                    boxDataAdmissao.Text!= null ||
+                    boxSalario.Text     != null ||
                     boxLogradouro.Text  != null ||
                     boxNivelAcess.Text  != null ||
                     boxRg.Text          != null ||
@@ -58,14 +59,13 @@ namespace folhaDePagamento.Forms
                     };
 
                     string dataOriginal = boxDataNasc.Text;
-                    DateTime dataAtual = DateTime.Now;
-                    int dia = dataAtual.Day;
-                    int mes = dataAtual.Month;
-                    int ano = dataAtual.Year;
-                    string DataAdmissao = $"{ano}-{mes}-{dia}";
+                    string dataAdmissao = boxDataAdmissao.Text;
+                    DateTime dataAdmissaoF = DateTime.ParseExact(dataAdmissao, "dd/MM/yyyy", CultureInfo.InvariantCulture);
+                    string dataAdmissaoFormatada = dataAdmissaoF.ToString("yyyy-MM-dd");
                     DateTime data = DateTime.ParseExact(dataOriginal, "dd/MM/yyyy", CultureInfo.InvariantCulture);
                     string dataFormatada = data.ToString("yyyy-MM-dd");
-
+                    string salarioFormatado = boxSalario.Text.Replace("R$", "");
+                    string dddFormatado = boxDDD.Text.Replace("(", "").Replace(")", "");
                     Func<string, string> removeCaracteresNumero = (string str) =>
                     {
 
@@ -91,7 +91,6 @@ namespace folhaDePagamento.Forms
                     ConnectDatabase connect = new ConnectDatabase();
                     connect.insertDataFunc(
                         boxNome.Text,
-                        boxId.Text,
                         boxEmail.Text,
                         cpf,
                         tel,
@@ -109,7 +108,9 @@ namespace folhaDePagamento.Forms
                         boxEstadoCivil.Text,
                         boxNivelAcess.Text,
                         boxPis.Text,
-                        DataAdmissao
+                        dataAdmissaoFormatada,
+                        salarioFormatado,
+                        dddFormatado
                         );
                     FormFuncionarios form = new FormFuncionarios();
                     form.Refresh();
@@ -130,5 +131,28 @@ namespace folhaDePagamento.Forms
         {
             this.Close();
         }
+        private void boxSalario_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Delete)
+            {
+                boxSalario.ClearUndo();
+            }
+        }
+
+        private void boxSalario_KeyPress(object sender, KeyPressEventArgs e)
+        {
+          
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) && e.KeyChar != '.' && e.KeyChar != ',')
+            {
+                e.Handled = true;
+            }
+
+            
+            if ((e.KeyChar == '.' || e.KeyChar == ',') && ((TextBox)sender).Text.Contains(".") || ((TextBox)sender).Text.Contains(","))
+            {
+                e.Handled = true; 
+            }
+        }
+
     }
 }
