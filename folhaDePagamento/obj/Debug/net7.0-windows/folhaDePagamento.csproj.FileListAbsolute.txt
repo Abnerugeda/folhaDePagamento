@@ -37,3 +37,4 @@ C:\Users\abner\OneDrive\Área de Trabalho\Pim\folhaDePagamento\folhaDePagamento\
 C:\Users\abner\OneDrive\Área de Trabalho\Pim\folhaDePagamento\folhaDePagamento\bin\Debug\net7.0-windows\runtimes\win-x64\native\krb5_64.dll
 C:\Users\abner\OneDrive\Área de Trabalho\Pim\folhaDePagamento\folhaDePagamento\bin\Debug\net7.0-windows\runtimes\win-x64\native\krbcc64.dll
 C:\Users\abner\OneDrive\Área de Trabalho\Pim\folhaDePagamento\folhaDePagamento\obj\Debug\net7.0-windows\folhaDePagamento.Forms.FormLogin.resources
+C:\Users\abner\OneDrive\Área de Trabalho\Pim\folhaDePagamento\folhaDePagamento\obj\Debug\net7.0-windows\folhaDePagamento.Forms.AlterarDados.resources

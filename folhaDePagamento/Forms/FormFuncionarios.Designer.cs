@@ -45,6 +45,7 @@
             this.listFuncionarios.TabIndex = 0;
             this.listFuncionarios.UseCompatibleStateImageBehavior = false;
             this.listFuncionarios.SelectedIndexChanged += new System.EventHandler(this.listFuncionarios_SelectedIndexChanged);
+            this.listFuncionarios.DoubleClick += new System.EventHandler(this.listFuncionarios_DoubleClick);
             // 
             // label1
             // 

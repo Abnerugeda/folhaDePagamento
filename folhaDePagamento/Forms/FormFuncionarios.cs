@@ -77,5 +77,21 @@ namespace folhaDePagamento.Forms
         {
 
         }
+        private void listFuncionarios_DoubleClick(object sender, EventArgs e)
+        {
+            foreach (ListViewItem item in listFuncionarios.Items)
+            {
+                if (item.Selected || item.Checked)
+                {
+                    AlterarDados alterarDados = new AlterarDados();
+                    ListViewItem items = listFuncionarios.Items[item.Index];
+                    alterarDados.callSet(int.Parse(items.SubItems[0].Text));
+                    alterarDados.StartPosition = FormStartPosition.CenterScreen;
+                    alterarDados.ShowDialog();
+
+                }
+            }
+        }
+
     }
 }

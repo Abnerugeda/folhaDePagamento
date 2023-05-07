@@ -560,7 +560,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(34)))), ((int)(((byte)(33)))), ((int)(((byte)(74)))));
-            this.ClientSize = new System.Drawing.Size(801, 512);
+            this.ClientSize = new System.Drawing.Size(800, 501);
             this.ControlBox = false;
             this.Controls.Add(this.boxSalario);
             this.Controls.Add(this.boxDDD);
@@ -608,8 +608,9 @@
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
             this.MaximizeBox = false;
+            this.MaximumSize = new System.Drawing.Size(816, 540);
             this.MinimizeBox = false;
-            this.MinimumSize = new System.Drawing.Size(816, 489);
+            this.MinimumSize = new System.Drawing.Size(816, 540);
             this.Name = "AdicionarFuncionario";
             this.Text = "Cadastrar Funcionario";
             this.ResumeLayout(false);
