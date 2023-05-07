@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.comboNome = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
@@ -37,8 +37,6 @@
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.comboPeriodo = new System.Windows.Forms.ComboBox();
-            this.label5 = new System.Windows.Forms.Label();
-            this.boxDataAdmissao = new System.Windows.Forms.MaskedTextBox();
             this.checkInss = new System.Windows.Forms.CheckBox();
             this.label7 = new System.Windows.Forms.Label();
             this.comboAvPrevio = new System.Windows.Forms.ComboBox();
@@ -62,6 +60,15 @@
             this.ColumnQuantidade = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ColumnVencimentos = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ColumnDescontos = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.iconDropDownButton1 = new FontAwesome.Sharp.IconDropDownButton();
+            this.boxDataAdmissao = new System.Windows.Forms.MaskedTextBox();
+            this.label5 = new System.Windows.Forms.Label();
+            this.label10 = new System.Windows.Forms.Label();
+            this.dateTimeFim = new System.Windows.Forms.DateTimePicker();
+            this.dateTimeInicio = new System.Windows.Forms.DateTimePicker();
+            this.label11 = new System.Windows.Forms.Label();
+            this.label12 = new System.Windows.Forms.Label();
+            this.label13 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.gridTotal)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridCalc)).BeginInit();
             this.SuspendLayout();
@@ -143,26 +150,6 @@
             this.comboPeriodo.Name = "comboPeriodo";
             this.comboPeriodo.Size = new System.Drawing.Size(109, 23);
             this.comboPeriodo.TabIndex = 7;
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label5.ForeColor = System.Drawing.Color.White;
-            this.label5.Location = new System.Drawing.Point(14, 53);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(120, 19);
-            this.label5.TabIndex = 9;
-            this.label5.Text = "Data de Admissão";
-            // 
-            // boxDataAdmissao
-            // 
-            this.boxDataAdmissao.Location = new System.Drawing.Point(14, 75);
-            this.boxDataAdmissao.Mask = "00/00/0000";
-            this.boxDataAdmissao.Name = "boxDataAdmissao";
-            this.boxDataAdmissao.Size = new System.Drawing.Size(120, 23);
-            this.boxDataAdmissao.TabIndex = 10;
-            this.boxDataAdmissao.ValidatingType = typeof(System.DateTime);
             // 
             // checkInss
             // 
@@ -326,8 +313,8 @@
             // 
             // ColumnTotalLiquido
             // 
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.ColumnTotalLiquido.DefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.ColumnTotalLiquido.DefaultCellStyle = dataGridViewCellStyle2;
             this.ColumnTotalLiquido.HeaderText = "Total Líquido";
             this.ColumnTotalLiquido.Name = "ColumnTotalLiquido";
             this.ColumnTotalLiquido.Width = 200;
@@ -341,7 +328,7 @@
             this.ColumnQuantidade,
             this.ColumnVencimentos,
             this.ColumnDescontos});
-            this.gridCalc.Location = new System.Drawing.Point(12, 150);
+            this.gridCalc.Location = new System.Drawing.Point(14, 150);
             this.gridCalc.Name = "gridCalc";
             this.gridCalc.RowTemplate.Height = 25;
             this.gridCalc.Size = new System.Drawing.Size(792, 205);
@@ -372,12 +359,109 @@
             this.ColumnDescontos.Name = "ColumnDescontos";
             this.ColumnDescontos.Width = 172;
             // 
+            // iconDropDownButton1
+            // 
+            this.iconDropDownButton1.IconChar = FontAwesome.Sharp.IconChar.None;
+            this.iconDropDownButton1.IconColor = System.Drawing.Color.Black;
+            this.iconDropDownButton1.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            this.iconDropDownButton1.Name = "iconDropDownButton1";
+            this.iconDropDownButton1.Size = new System.Drawing.Size(23, 23);
+            this.iconDropDownButton1.Text = "iconDropDownButton1";
+            // 
+            // boxDataAdmissao
+            // 
+            this.boxDataAdmissao.Location = new System.Drawing.Point(14, 75);
+            this.boxDataAdmissao.Mask = "00/00/0000";
+            this.boxDataAdmissao.Name = "boxDataAdmissao";
+            this.boxDataAdmissao.Size = new System.Drawing.Size(120, 23);
+            this.boxDataAdmissao.TabIndex = 25;
+            this.boxDataAdmissao.ValidatingType = typeof(System.DateTime);
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.label5.ForeColor = System.Drawing.Color.White;
+            this.label5.Location = new System.Drawing.Point(14, 53);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(120, 19);
+            this.label5.TabIndex = 24;
+            this.label5.Text = "Data de Admissão";
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.label10.ForeColor = System.Drawing.Color.White;
+            this.label10.Location = new System.Drawing.Point(606, 53);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(70, 19);
+            this.label10.TabIndex = 26;
+            this.label10.Text = "Data Final";
+            // 
+            // dateTimeFim
+            // 
+            this.dateTimeFim.Location = new System.Drawing.Point(606, 75);
+            this.dateTimeFim.Name = "dateTimeFim";
+            this.dateTimeFim.Size = new System.Drawing.Size(110, 23);
+            this.dateTimeFim.TabIndex = 27;
+            this.dateTimeFim.Value = new System.DateTime(2023, 5, 7, 16, 34, 27, 0);
+            // 
+            // dateTimeInicio
+            // 
+            this.dateTimeInicio.Location = new System.Drawing.Point(464, 75);
+            this.dateTimeInicio.Name = "dateTimeInicio";
+            this.dateTimeInicio.Size = new System.Drawing.Size(110, 23);
+            this.dateTimeInicio.TabIndex = 29;
+            this.dateTimeInicio.Value = new System.DateTime(2023, 5, 7, 16, 34, 27, 0);
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.label11.ForeColor = System.Drawing.Color.White;
+            this.label11.Location = new System.Drawing.Point(464, 53);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(76, 19);
+            this.label11.TabIndex = 28;
+            this.label11.Text = "Data Inicial";
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.label12.ForeColor = System.Drawing.Color.White;
+            this.label12.Location = new System.Drawing.Point(582, 75);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(18, 21);
+            this.label12.TabIndex = 30;
+            this.label12.Text = "à";
+            // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.label13.ForeColor = System.Drawing.Color.White;
+            this.label13.Location = new System.Drawing.Point(348, 76);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(114, 19);
+            this.label13.TabIndex = 31;
+            this.label13.Text = "Dias trabalhados:";
+            // 
             // FormFolha
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(34)))), ((int)(((byte)(33)))), ((int)(((byte)(74)))));
             this.ClientSize = new System.Drawing.Size(811, 513);
+            this.Controls.Add(this.label13);
+            this.Controls.Add(this.label12);
+            this.Controls.Add(this.dateTimeInicio);
+            this.Controls.Add(this.label11);
+            this.Controls.Add(this.dateTimeFim);
+            this.Controls.Add(this.label10);
+            this.Controls.Add(this.boxDataAdmissao);
+            this.Controls.Add(this.label5);
             this.Controls.Add(this.gridTotal);
             this.Controls.Add(this.gridCalc);
             this.Controls.Add(this.boxCpfFolha);
@@ -390,8 +474,6 @@
             this.Controls.Add(this.checkInss);
             this.Controls.Add(this.boxDataDemissao);
             this.Controls.Add(this.label6);
-            this.Controls.Add(this.boxDataAdmissao);
-            this.Controls.Add(this.label5);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.comboPeriodo);
             this.Controls.Add(this.boxSalario);
@@ -419,8 +501,6 @@
         private Label label3;
         private Label label4;
         private ComboBox comboPeriodo;
-        private Label label5;
-        private MaskedTextBox boxDataAdmissao;
         private CheckBox checkInss;
         private Label label7;
         private ComboBox comboAvPrevio;
@@ -444,5 +524,14 @@
         private DataGridViewTextBoxColumn ColumnQuantidade;
         private DataGridViewTextBoxColumn ColumnVencimentos;
         private DataGridViewTextBoxColumn ColumnDescontos;
+        private FontAwesome.Sharp.IconDropDownButton iconDropDownButton1;
+        private MaskedTextBox boxDataAdmissao;
+        private Label label5;
+        private Label label10;
+        private DateTimePicker dateTimeFim;
+        private DateTimePicker dateTimeInicio;
+        private Label label11;
+        private Label label12;
+        private Label label13;
     }
 }

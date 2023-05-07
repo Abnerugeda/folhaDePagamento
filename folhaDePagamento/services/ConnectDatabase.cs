@@ -148,7 +148,7 @@ namespace folhaDePagamento.services
         {
             try
             {
-                MySqlCommand sqlCommand = new MySqlCommand("SELECT * FROM funcionario", connect());
+                MySqlCommand sqlCommand = new MySqlCommand("SELECT * FROM funcionario, salario", connect());
                 MySqlDataReader reader = sqlCommand.ExecuteReader();
                 var listFuncionarios = new List<ListFuncionarios>();
                 
@@ -156,7 +156,7 @@ namespace folhaDePagamento.services
                 {
                     if (reader["ATIVO"].Equals(true))
                     {
-                        listFuncionarios.Add(new ListFuncionarios(reader["IDFUNCIONARIO"].ToString(), reader["NOME"].ToString(), reader["NIVELACESSO"].ToString(), reader["CPF"].ToString(), reader["DATA_ADMISSAO"].ToString()));
+                        listFuncionarios.Add(new ListFuncionarios(reader["IDFUNCIONARIO"].ToString(), reader["NOME"].ToString(), reader["NIVELACESSO"].ToString(), reader["CPF"].ToString(), reader["DATA_ADMISSAO"].ToString(), reader["salario"].ToString()));
                     }
 
                 }

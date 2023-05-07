@@ -17,13 +17,16 @@ namespace folhaDePagamento.controller
         public string Cpf { get; set; }
         public string DataAdmissao { get; set; }
 
-        public ListFuncionarios(string id, string nome, string cargo, string cpf, string dataAdmissao)
+        public string Salario { get; set; }
+
+        public ListFuncionarios(string id, string nome, string cargo, string cpf, string dataAdmissao, string salario)
         {
             Id = id;
             Nome = nome;
             Cargo = cargo;
             Cpf = cpf;
             DataAdmissao = dataAdmissao;
+            Salario = salario;
         }
 
         public static List<ListFuncionarios> GetListFuncionarios()

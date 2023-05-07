@@ -4,6 +4,7 @@ using Org.BouncyCastle.Crypto.Tls;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Configuration;
 using System.Data;
 using System.Drawing;
 using System.Linq;
@@ -21,26 +22,18 @@ namespace folhaDePagamento.Forms
         {
             InitializeComponent();
             PopularBox();
-          
+            dateTimeFim.Format = DateTimePickerFormat.Custom;
+            dateTimeFim.CustomFormat = "dd/MM/yyyy";
+            dateTimeInicio.Format = DateTimePickerFormat.Custom;
+            dateTimeInicio.CustomFormat = "dd/MM/yyyy";
+
+
         }
 
-        private void abrirChildForm(Form childForm)
-        {
-            if (currentChildForm != null)
-            {
-                currentChildForm.Close();
-            }
-            currentChildForm = childForm;
-            childForm.TopLevel = false;
-            childForm.FormBorderStyle = FormBorderStyle.None;
-            childForm.Dock = DockStyle.Fill;
-            childForm.BringToFront();
-            childForm.Show();
-        }
 
         public void PopularBox()
         {
-            String[] item = new string[5];
+            String[] item = new string[6];
             foreach (ListFuncionarios funcionario in funcionariosAll())
             {
                 item[0] = funcionario.Id.ToString();
@@ -48,6 +41,7 @@ namespace folhaDePagamento.Forms
                 item[2] = funcionario.Cargo;
                 item[3] = funcionario.Cpf;
                 item[4] = funcionario.DataAdmissao;
+                item[5] = funcionario.Salario;
                 comboNome.Items.Add(item[1]);
             }
         }
@@ -59,14 +53,21 @@ namespace folhaDePagamento.Forms
 
         private void comboNome_SelectedIndexChanged(object sender, EventArgs e)
         {
+            DateTime dataHoje = DateTime.Today;
+            string dia = dataHoje.ToString("dd");
+            string mes = dataHoje.ToString("MM");
+            string ano = dataHoje.ToString("yyyy");
+            MessageBox.Show(dia);
+            string dataComplet = $"{dia}/{mes}/{ano}";
             var funcionarioSelecionado = comboNome.SelectedItem.ToString();
-            String[] item = new string[5];
             foreach (ListFuncionarios funcionario in funcionariosAll())
             {
                 if (funcionarioSelecionado == funcionario.Nome.ToString())
                 {
                     boxDataAdmissao.Text = funcionario.DataAdmissao;
                     boxCpfFolha.Text = funcionario.Cpf;
+                    boxSalario.Text = funcionario.Salario;
+                    
                 }
             }
         
