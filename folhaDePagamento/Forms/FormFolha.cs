@@ -37,16 +37,15 @@ namespace folhaDePagamento.Forms
 
         public void PopularBox()
         {
-            String[] item = new string[7];
+            String[] item = new string[6];
             foreach (ListFuncionarios funcionario in funcionariosAll())
             {
                 item[0] = funcionario.Id.ToString();
                 item[1] = funcionario.Nome;
-                item[2] = funcionario.NivelAcesso;
-                item[3] = funcionario.Cpf;
-                item[4] = funcionario.DataAdmissao;
-                item[5] = funcionario.Salario;
-                item[6] = funcionario.Cargo;
+                item[2] = funcionario.Cpf;
+                item[3] = funcionario.DataAdmissao;
+                item[4] = funcionario.Salario;
+                item[5]= funcionario.Cargo;
                 comboNome.Items.Add(item[1]);
             }
         }
@@ -181,7 +180,7 @@ namespace folhaDePagamento.Forms
                                 document.Close();
                                 fileStream.Close();
                             }
-                            MessageBox.Show("Data Export Successfully", "info");
+                            MessageBox.Show("PDF salvo com sucesso!", "info");
                     }
                     catch (Exception ex)
                     {

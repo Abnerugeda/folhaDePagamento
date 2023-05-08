@@ -111,7 +111,9 @@ namespace folhaDePagamento.Forms
                         dataAdmissaoFormatada,
                         salarioFormatado,
                         dddFormatado,
-                        boxCargo.Text
+                        boxCargo.Text,
+                        boxUsuario.Text,
+                        boxSenha.Text
                         );
                     this.Close();
                 }

@@ -1,9 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "+TZVC/6VDFkFTenTsQJT/M6F4xgRk427SIMCFWXdAnHFbTkZ3uyOr+rBCeyJDTXeOhAlCfkmxqCjvE6garYvmg==",
+  "dgSpecHash": "LGI4/d0f4N32F2nE4DSPrprbTulT5epINmR/e7akj5dmbVntOSx3B7FQdPg5ayjJtumHs0R91mF2XwXG9HNg6A==",
   "success": true,
   "projectFilePath": "C:\\Users\\Gabriel\\Documents\\abenr\\folhaDePagamento\\folhaDePagamento\\folhaDePagamento.csproj",
   "expectedPackageFiles": [
+    "C:\\Users\\Gabriel\\.nuget\\packages\\bcrypt.net-next\\4.0.3\\bcrypt.net-next.4.0.3.nupkg.sha512",
     "C:\\Users\\Gabriel\\.nuget\\packages\\bouncycastle\\1.8.9\\bouncycastle.1.8.9.nupkg.sha512",
     "C:\\Users\\Gabriel\\.nuget\\packages\\fontawesome.sharp\\6.3.0\\fontawesome.sharp.6.3.0.nupkg.sha512",
     "C:\\Users\\Gabriel\\.nuget\\packages\\google.protobuf\\3.21.9\\google.protobuf.3.21.9.nupkg.sha512",

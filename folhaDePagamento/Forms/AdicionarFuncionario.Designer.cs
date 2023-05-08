@@ -75,6 +75,10 @@
             boxSalario = new TextBox();
             boxCargo = new TextBox();
             label23 = new Label();
+            boxUsuario = new TextBox();
+            label24 = new Label();
+            boxSenha = new TextBox();
+            label25 = new Label();
             SuspendLayout();
             // 
             // label2
@@ -553,7 +557,7 @@
             boxCargo.BackColor = Color.GhostWhite;
             boxCargo.Location = new Point(87, 235);
             boxCargo.Name = "boxCargo";
-            boxCargo.Size = new Size(372, 23);
+            boxCargo.Size = new Size(229, 23);
             boxCargo.TabIndex = 51;
             // 
             // label23
@@ -568,6 +572,44 @@
             label23.Text = "Cargo:";
             label23.Click += label23_Click;
             // 
+            // boxUsuario
+            // 
+            boxUsuario.BackColor = Color.GhostWhite;
+            boxUsuario.Location = new Point(395, 235);
+            boxUsuario.Name = "boxUsuario";
+            boxUsuario.Size = new Size(120, 23);
+            boxUsuario.TabIndex = 53;
+            // 
+            // label24
+            // 
+            label24.AutoSize = true;
+            label24.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            label24.ForeColor = Color.White;
+            label24.Location = new Point(322, 233);
+            label24.Name = "label24";
+            label24.Size = new Size(67, 21);
+            label24.TabIndex = 52;
+            label24.Text = "Usuario:";
+            // 
+            // boxSenha
+            // 
+            boxSenha.BackColor = Color.GhostWhite;
+            boxSenha.Location = new Point(589, 235);
+            boxSenha.Name = "boxSenha";
+            boxSenha.Size = new Size(120, 23);
+            boxSenha.TabIndex = 55;
+            // 
+            // label25
+            // 
+            label25.AutoSize = true;
+            label25.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            label25.ForeColor = Color.White;
+            label25.Location = new Point(527, 233);
+            label25.Name = "label25";
+            label25.Size = new Size(56, 21);
+            label25.TabIndex = 54;
+            label25.Text = "Senha:";
+            // 
             // AdicionarFuncionario
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -575,6 +617,10 @@
             BackColor = Color.FromArgb(34, 33, 74);
             ClientSize = new Size(800, 524);
             ControlBox = false;
+            Controls.Add(boxSenha);
+            Controls.Add(label25);
+            Controls.Add(boxUsuario);
+            Controls.Add(label24);
             Controls.Add(boxCargo);
             Controls.Add(label23);
             Controls.Add(boxSalario);
@@ -625,7 +671,7 @@
             MaximizeBox = false;
             MaximumSize = new Size(816, 563);
             MinimizeBox = false;
-            MinimumSize = new Size(816, 540);
+            MinimumSize = new Size(816, 563);
             Name = "AdicionarFuncionario";
             Text = "Cadastrar Funcionario";
             ResumeLayout(false);
@@ -680,5 +726,9 @@
         private TextBox boxSalario;
         private TextBox boxCargo;
         private Label label23;
+        private TextBox boxUsuario;
+        private Label label24;
+        private TextBox boxSenha;
+        private Label label25;
     }
 }

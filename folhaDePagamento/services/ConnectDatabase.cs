@@ -1,5 +1,6 @@
 ﻿using folhaDePagamento.controller;
 using folhaDePagamento.Forms;
+using System.Security.Cryptography;
 using Microsoft.VisualBasic;
 using MySql.Data.MySqlClient;
 using System;
@@ -7,6 +8,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.TextBox;
 
 namespace folhaDePagamento.services
 {
@@ -54,15 +56,16 @@ namespace folhaDePagamento.services
             string dataAdmissao,
             string salario,
             string ddd,
-            string cargo
+            string cargo,
+            string usuario,
+            string senha
             )
         {
             try
             {
 
                 MySqlCommand comm = connect().CreateCommand();
-                comm.CommandText = $"INSERT INTO funcionario VALUES(DEFAULT, @NIVELACESSO, @NOME, @CPF, @RG, @PIS, @GENERO, @DATA_NASCI, @ESTADO_CIVIL, @EMAIL, @ATIVO, @DATA_ADMISSAO);";
-                comm.Parameters.AddWithValue("@NIVELACESSO", nivelAcess);
+                comm.CommandText = $"INSERT INTO funcionario VALUES(DEFAULT, @NOME, @CPF, @RG, @PIS, @GENERO, @DATA_NASCI, @ESTADO_CIVIL, @EMAIL, @ATIVO, @DATA_ADMISSAO);";
                 comm.Parameters.AddWithValue("@NOME", nome);
                 comm.Parameters.AddWithValue("@CPF", cpf);
                 comm.Parameters.AddWithValue("@RG", rg);
@@ -78,6 +81,9 @@ namespace folhaDePagamento.services
                 insertTelefoneCelular(ddd, telefone, cpf);
                 if(telefoneRes != null)insertTelefoneResi(ddd, telefoneRes, cpf);
                 insertEndereco(cep, logradouro, numero, uf, complemento, bairro, cpf, municipio);
+                string hash = BCrypt.Net.BCrypt.HashPassword(senha);
+                insertAcesso(nivelAcess, usuario, hash, cpf);
+
             }catch(Exception ex)
             {
                 MessageBox.Show($"Ocorreu um erro na hora de cadastrar, revise as informações e tente novamente! {ex}");
@@ -134,6 +140,16 @@ namespace folhaDePagamento.services
 
             }
         }
+        public void insertAcesso(string acesso, string usuario, string senha, string cpf)
+        {
+            MySqlCommand comm = connect().CreateCommand();
+            comm.CommandText = "INSERT INTO ACESSO VALUES(DEFAULT, @acesso,  @login , @senha, @IDFUNCIONARIO);";
+            comm.Parameters.AddWithValue("@IDFUNCIONARIO", queryIdFunc(cpf));
+            comm.Parameters.AddWithValue("@acesso", acesso);
+            comm.Parameters.AddWithValue("@login", usuario);
+            comm.Parameters.AddWithValue("@senha", senha);
+            comm.ExecuteNonQuery();
+        }
         public string queryIdFunc(string cpf)
         {
             MySqlCommand sqlCommand = new MySqlCommand("SELECT * FROM funcionario WHERE CPF = @CPF", connect());
@@ -158,7 +174,7 @@ namespace folhaDePagamento.services
                 {
                     if (reader["ATIVO"].Equals(true))
                     {
-                        listFuncionarios.Add(new ListFuncionarios(reader["IDFUNCIONARIO"].ToString(), reader["NOME"].ToString(), reader["NIVELACESSO"].ToString(), reader["CPF"].ToString(), reader["DATA_ADMISSAO"].ToString(), reader["SALARIOBRUTO"].ToString(), reader["CARGO"].ToString()));
+                        listFuncionarios.Add(new ListFuncionarios(reader["IDFUNCIONARIO"].ToString(), reader["NOME"].ToString(), reader["CPF"].ToString(), reader["DATA_ADMISSAO"].ToString(), reader["SALARIOBRUTO"].ToString(), reader["CARGO"].ToString()));
                     }
 
                 }
@@ -211,7 +227,8 @@ namespace folhaDePagamento.services
 
                 while (reader.Read())
                 {
-                    if (reader["LOGIN"].ToString().ToLower() == usuario.ToLower() && reader["SENHA"].ToString() == senha)
+                    MessageBox.Show(BCrypt.Net.BCrypt.Verify(senha, reader["SENHA"].ToString()).ToString());
+                    if (reader["LOGIN"].ToString().ToLower() == usuario.ToLower() && BCrypt.Net.BCrypt.Verify(senha, reader["SENHA"].ToString()))
                     {
                         return true;
                     }
@@ -228,5 +245,6 @@ namespace folhaDePagamento.services
                 return false;
             }
         }
+    
     }
 }
