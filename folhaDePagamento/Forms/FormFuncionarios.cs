@@ -72,7 +72,10 @@ namespace folhaDePagamento.Forms
                 
             }
         }
-
+        public void clearList()
+        {
+            listFuncionarios.Clear();
+        }
         private void listFuncionarios_SelectedIndexChanged(object sender, EventArgs e)
         {
 

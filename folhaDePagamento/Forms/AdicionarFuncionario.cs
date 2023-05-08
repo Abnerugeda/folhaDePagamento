@@ -17,12 +17,12 @@ namespace folhaDePagamento.Forms
 {
     public partial class AdicionarFuncionario : Form
     {
-        
+
         public AdicionarFuncionario()
         {
             InitializeComponent();
             ControlBox = false;
-            
+
         }
 
         private void boxCpf_TextChanged(object sender, EventArgs e)
@@ -35,22 +35,22 @@ namespace folhaDePagamento.Forms
             try
             {
                 if (
-                    boxCpf.Text         != null ||
-                    boxBairro.Text      != null ||
-                    boxCep.Text         != null ||
-                    boxDataNasc.Text    != null ||
-                    boxEmail.Text       != null ||
+                    boxCpf.Text != null ||
+                    boxBairro.Text != null ||
+                    boxCep.Text != null ||
+                    boxDataNasc.Text != null ||
+                    boxEmail.Text != null ||
                     boxEstadoCivil.Text != null ||
-                    boxGenero.Text      != null ||
-                    boxDataAdmissao.Text!= null ||
-                    boxSalario.Text     != null ||
-                    boxLogradouro.Text  != null ||
-                    boxNivelAcess.Text  != null ||
-                    boxRg.Text          != null ||
-                    boxMunicipio.Text   != null ||
-                    boxTel.Text         != null ||
-                    boxUf.Text          != null ||
-                    boxNumero.Text      != null
+                    boxGenero.Text != null ||
+                    boxDataAdmissao.Text != null ||
+                    boxSalario.Text != null ||
+                    boxLogradouro.Text != null ||
+                    boxNivelAcess.Text != null ||
+                    boxRg.Text != null ||
+                    boxMunicipio.Text != null ||
+                    boxTel.Text != null ||
+                    boxUf.Text != null ||
+                    boxNumero.Text != null
                     )
                 {
                     Func<string, string> removeCaracteres = (string str) =>
@@ -110,20 +110,20 @@ namespace folhaDePagamento.Forms
                         boxPis.Text,
                         dataAdmissaoFormatada,
                         salarioFormatado,
-                        dddFormatado
+                        dddFormatado,
+                        boxCargo.Text
                         );
-                    FormFuncionarios form = new FormFuncionarios();
-                    form.Refresh();
                     this.Close();
                 }
                 else
-                { 
+                {
                     System.Windows.MessageBox.Show("Você deixou algum campo vazio, por favor, revise o cadastro e tente novamente.", "Erro!");
                 }
-               
-            }catch(Exception ex)
+
+            }
+            catch (Exception ex)
             {
-                System.Windows.MessageBox.Show($"Ocorreu um erro, revise o seu cadastro e tente novamente. Certifique-se que não há nenhum campo vazio. {ex}", "Erro");
+                System.Windows.MessageBox.Show($"Ocorreu um erro, revise o seu cadastro e tente novamente. Certifique-se que não há nenhum campo vazio. ", "Erro");
             }
         }
 
@@ -141,18 +141,22 @@ namespace folhaDePagamento.Forms
 
         private void boxSalario_KeyPress(object sender, KeyPressEventArgs e)
         {
-          
+
             if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) && e.KeyChar != '.' && e.KeyChar != ',')
             {
                 e.Handled = true;
             }
 
-            
+
             if ((e.KeyChar == '.' || e.KeyChar == ',') && ((TextBox)sender).Text.Contains(".") || ((TextBox)sender).Text.Contains(","))
             {
-                e.Handled = true; 
+                e.Handled = true;
             }
         }
 
+        private void label23_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

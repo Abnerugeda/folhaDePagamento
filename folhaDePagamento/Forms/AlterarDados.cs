@@ -38,6 +38,7 @@ namespace folhaDePagamento.Forms
         private string salario;
         private string ddd;
         private string telRes;
+        private string cargo;
         private int id;
 
         public AlterarDados(int id)
@@ -53,7 +54,7 @@ namespace folhaDePagamento.Forms
 
         }
 
-       private void setDataFuncionario(int id)
+        private void setDataFuncionario(int id)
         {
             ConnectDatabase db = new ConnectDatabase();
             MySqlCommand comm = db.connect().CreateCommand();
@@ -61,7 +62,7 @@ namespace folhaDePagamento.Forms
             comm.Parameters.AddWithValue("@IDFUNCIONARIO", id);
             MySqlDataReader reader = comm.ExecuteReader();
 
-            while(reader.Read())
+            while (reader.Read())
             {
                 nome = reader["NOME"].ToString();
                 email = reader["EMAIL"].ToString();
@@ -80,13 +81,14 @@ namespace folhaDePagamento.Forms
         {
             ConnectDatabase db = new ConnectDatabase();
             MySqlCommand comm = db.connect().CreateCommand();
-            comm.CommandText = "SELECT * FROM salario where IDFUNCIONARIO = @IDFUNCIONARIO;";
+            comm.CommandText = "SELECT * FROM CONTRATO where IDFUNCIONARIO = @IDFUNCIONARIO;";
             comm.Parameters.AddWithValue("@IDFUNCIONARIO", id);
             MySqlDataReader reader = comm.ExecuteReader();
 
             while (reader.Read())
             {
-                salario = reader["SALARIO"].ToString();
+                salario = reader["SALARIOBRUTO"].ToString();
+                cargo = reader["CARGO"].ToString();
             }
         }
         private void setDataEndereco(int id)
@@ -99,7 +101,7 @@ namespace folhaDePagamento.Forms
 
             while (reader.Read())
             {
-                
+
                 uf = reader["UF"].ToString();
                 logradouro = reader["LOGRADOURO"].ToString();
                 numero = reader["NUMERO"].ToString();
@@ -107,7 +109,7 @@ namespace folhaDePagamento.Forms
                 cep = reader["CEP"].ToString();
                 municipio = reader["MUNICIPIO"].ToString();
                 complemento = reader["COMPLEMENTO"].ToString();
-           
+
             }
         }
 
@@ -135,6 +137,7 @@ namespace folhaDePagamento.Forms
             boxSalario.Text = salario;
             boxDDD.Text = ddd;
             boxTelefoneRes.Text = telRes;
+            boxCargo.Text = cargo;
 
         }
         private void setDataTel(int id)
@@ -185,7 +188,7 @@ namespace folhaDePagamento.Forms
                 string dataAdmissaoFormatada = dataAdmissaoF.ToString("yyyy-MM-dd");
                 DateTime data = DateTime.ParseExact(dataOriginal, "dd/MM/yyyy", CultureInfo.InvariantCulture);
                 string dataFormatada = data.ToString("yyyy-MM-dd");
-                string salarioFormatado = boxSalario.Text.Replace("R$", "");
+
                 string dddFormatado = boxDDD.Text.Replace("(", "").Replace(")", "");
                 Func<string, string> removeCaracteresNumero = (string str) =>
                 {
@@ -237,9 +240,10 @@ namespace folhaDePagamento.Forms
                 comm.Parameters.AddWithValue("@NUMERO2", numeroRes);
                 comm.ExecuteNonQuery();
 
-                comm.CommandText = "UPDATE salario SET SALARIO = @SALARIO WHERE IDFUNCIONARIO = @ID3;";
+                comm.CommandText = "UPDATE CONTRATO SET SALARIOBRUTO = @SALARIO, CARGO = @CARGO WHERE IDFUNCIONARIO = @ID3;";
                 comm.Parameters.AddWithValue("@ID3", id);
-                comm.Parameters.AddWithValue("@SALARIO", salarioFormatado);
+                comm.Parameters.AddWithValue("@SALARIO", double.Parse(boxSalario.Text));
+                comm.Parameters.AddWithValue("@CARGO", boxCargo.Text);
                 comm.ExecuteNonQuery();
 
                 this.Close();
@@ -254,6 +258,11 @@ namespace folhaDePagamento.Forms
         private void btnCancelar_Click(object sender, EventArgs e)
         {
             this.Close();
+        }
+
+        private void AlterarDados_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

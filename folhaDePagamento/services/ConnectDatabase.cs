@@ -17,7 +17,7 @@ namespace folhaDePagamento.services
         {
             try
             {
-                string strConexao = "server=localhost;uid=root;pwd=abnereei5;database=dbdepartamento";
+                string strConexao = "server=localhost;uid=root;pwd=123456;database=dbdepartamento";
                 MySqlConnection conexao = new MySqlConnection(strConexao);
                 conexao.Open();
                 return conexao;
@@ -53,7 +53,8 @@ namespace folhaDePagamento.services
             string pis,
             string dataAdmissao,
             string salario,
-            string ddd
+            string ddd,
+            string cargo
             )
         {
             try
@@ -73,7 +74,7 @@ namespace folhaDePagamento.services
                 comm.Parameters.AddWithValue("@ATIVO", "1");
                 comm.Parameters.AddWithValue("@DATA_ADMISSAO", dataAdmissao);
                 comm.ExecuteNonQuery();
-                insertSalario(salario, cpf, dataAdmissao);
+                insertSalario(salario, cpf, dataAdmissao, cargo);
                 insertTelefoneCelular(ddd, telefone, cpf);
                 if(telefoneRes != null)insertTelefoneResi(ddd, telefoneRes, cpf);
                 insertEndereco(cep, logradouro, numero, uf, complemento, bairro, cpf, municipio);
@@ -115,15 +116,16 @@ namespace folhaDePagamento.services
             comm.Parameters.AddWithValue("CEP", cep);
             comm.ExecuteNonQuery();
         }
-        public void insertSalario(string salario, string cpf, string dataAdmissao)
+        public void insertSalario(string salario, string cpf, string dataAdmissao, string cargo)
         {
             try
             {
                 MySqlCommand comm = connect().CreateCommand();
-                comm.CommandText = "INSERT INTO SALARIO VALUES(DEFAULT, @IDFUNCIONARIO, @SALARIO, @DATA_SALARIO);";
+                comm.CommandText = "INSERT INTO CONTRATO VALUES(DEFAULT, @IDFUNCIONARIO,  @DATA_SALARIO, @SALARIO, @CARGO);";
                 comm.Parameters.AddWithValue("@IDFUNCIONARIO", queryIdFunc(cpf));
                 comm.Parameters.AddWithValue("@SALARIO", salario);
-                comm.Parameters.AddWithValue("DATA_SALARIO", dataAdmissao);
+                comm.Parameters.AddWithValue("@DATA_SALARIO", dataAdmissao);
+                comm.Parameters.AddWithValue("@CARGO", cargo);
                 comm.ExecuteNonQuery();
             }
             catch(Exception e)
@@ -148,7 +150,7 @@ namespace folhaDePagamento.services
         {
             try
             {
-                MySqlCommand sqlCommand = new MySqlCommand("SELECT * FROM funcionario, salario", connect());
+                MySqlCommand sqlCommand = new MySqlCommand("SELECT * FROM funcionario, CONTRATO where CONTRATO.IDFUNCIONARIO = FUNCIONARIO.IDFUNCIONARIO", connect());
                 MySqlDataReader reader = sqlCommand.ExecuteReader();
                 var listFuncionarios = new List<ListFuncionarios>();
                 
@@ -156,7 +158,7 @@ namespace folhaDePagamento.services
                 {
                     if (reader["ATIVO"].Equals(true))
                     {
-                        listFuncionarios.Add(new ListFuncionarios(reader["IDFUNCIONARIO"].ToString(), reader["NOME"].ToString(), reader["NIVELACESSO"].ToString(), reader["CPF"].ToString(), reader["DATA_ADMISSAO"].ToString(), reader["salario"].ToString()));
+                        listFuncionarios.Add(new ListFuncionarios(reader["IDFUNCIONARIO"].ToString(), reader["NOME"].ToString(), reader["NIVELACESSO"].ToString(), reader["CPF"].ToString(), reader["DATA_ADMISSAO"].ToString(), reader["SALARIOBRUTO"].ToString(), reader["CARGO"].ToString()));
                     }
 
                 }

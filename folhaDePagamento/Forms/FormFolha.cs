@@ -37,15 +37,16 @@ namespace folhaDePagamento.Forms
 
         public void PopularBox()
         {
-            String[] item = new string[6];
+            String[] item = new string[7];
             foreach (ListFuncionarios funcionario in funcionariosAll())
             {
                 item[0] = funcionario.Id.ToString();
                 item[1] = funcionario.Nome;
-                item[2] = funcionario.Cargo;
+                item[2] = funcionario.NivelAcesso;
                 item[3] = funcionario.Cpf;
                 item[4] = funcionario.DataAdmissao;
                 item[5] = funcionario.Salario;
+                item[6] = funcionario.Cargo;
                 comboNome.Items.Add(item[1]);
             }
         }
@@ -65,6 +66,7 @@ namespace folhaDePagamento.Forms
                     boxDataAdmissao.Text = funcionario.DataAdmissao;
                     boxCpfFolha.Text = funcionario.Cpf;
                     boxSalario.Text = funcionario.Salario;
+                    boxFuncao.Text = funcionario.Cargo;
                 }
             }
         
