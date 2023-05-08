@@ -14,6 +14,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using MySql.Data.MySqlClient;
 
 namespace folhaDePagamento.Forms
 {
@@ -207,5 +208,13 @@ namespace folhaDePagamento.Forms
             gridTotal.Rows.Add("13º Salário", "", "", "Valor do Fgts", "", "", "");
             gridTotal.Rows.Add("Av.Prévio", "", "", "0", "", "", "");
         }
+        //private void insertFolha()
+        //{
+        //    ConnectDatabase db = new ConnectDatabase();
+        //    MySqlCommand comm = db.connect().CreateCommand();
+        //    comm.CommandText = "INSERT INTO FOLHA VALUES (DEFAULT, @IDFUNCIONARIO, @SALARIOLQIUIDO, @SALARIOBRUTO, @FGTS, @VT, @CONVENIO, @IRRF, @INSS, @DESCFALTA);";
+        //    comm.Parameters.AddWithValue("@IDFUNCINOARIO", ),
+        //    comm.Parameters.AddWithValue("@SALARIOLQIUIDO, ")
+        //}
     }
 }
