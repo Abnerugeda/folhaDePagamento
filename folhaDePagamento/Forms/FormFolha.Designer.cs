@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.comboNome = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
@@ -313,8 +313,8 @@
             // 
             // ColumnTotalLiquido
             // 
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.ColumnTotalLiquido.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.ColumnTotalLiquido.DefaultCellStyle = dataGridViewCellStyle1;
             this.ColumnTotalLiquido.HeaderText = "Total Líquido";
             this.ColumnTotalLiquido.Name = "ColumnTotalLiquido";
             this.ColumnTotalLiquido.Width = 200;
@@ -328,7 +328,7 @@
             this.ColumnQuantidade,
             this.ColumnVencimentos,
             this.ColumnDescontos});
-            this.gridCalc.Location = new System.Drawing.Point(14, 150);
+            this.gridCalc.Location = new System.Drawing.Point(12, 150);
             this.gridCalc.Name = "gridCalc";
             this.gridCalc.RowTemplate.Height = 25;
             this.gridCalc.Size = new System.Drawing.Size(792, 205);
