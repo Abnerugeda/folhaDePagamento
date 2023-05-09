@@ -75,7 +75,7 @@ namespace folhaDePagamento
         private void iconButton1_Click_1(object sender, EventArgs e)
         {
             AtivarBotao(sender, RGBcolors.color1);
-            abrirChildForm(new FormDashboard());
+            abrirChildForm(new DashFuncionario());
         }
 
         private void iconButton2_Click(object sender, EventArgs e)

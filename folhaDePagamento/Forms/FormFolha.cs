@@ -20,7 +20,7 @@ namespace folhaDePagamento.Forms
 {
     public partial class FormFolha : Form
     {
-  
+
         private Form currentChildForm;
         public FormFolha()
         {
@@ -45,11 +45,12 @@ namespace folhaDePagamento.Forms
                 item[2] = funcionario.Cpf;
                 item[3] = funcionario.DataAdmissao;
                 item[4] = funcionario.Salario;
-                item[5]= funcionario.Cargo;
+                item[5] = funcionario.Cargo;
                 comboNome.Items.Add(item[1]);
             }
         }
-        private List<ListFuncionarios> funcionariosAll(){
+        private List<ListFuncionarios> funcionariosAll()
+        {
             ConnectDatabase connect = new ConnectDatabase();
             var listFunc = connect.queryFunc();
             return listFunc;
@@ -68,19 +69,23 @@ namespace folhaDePagamento.Forms
                     boxFuncao.Text = funcionario.Cargo;
                 }
             }
-        
+
         }
         private double calculoInss(double salarioBruto)
         {
-            if(salarioBruto < 1302.00){
+            if (salarioBruto < 1302.00)
+            {
                 return salarioBruto * 0.75;
-            }else if(salarioBruto < 2571.29 && salarioBruto > 1302.00)
+            }
+            else if (salarioBruto < 2571.29 && salarioBruto > 1302.00)
             {
                 return (salarioBruto - 1302.00) * 0.09 + 97.65;
-            }else if(salarioBruto < 3856.94 && salarioBruto > 2571.29)
+            }
+            else if (salarioBruto < 3856.94 && salarioBruto > 2571.29)
             {
                 return (salarioBruto - 2571.29) * 0.12 + 114.24 + 97.65;
-            }else
+            }
+            else
             {
                 return (7507.49 - 3856.94) * 0.14 + 114.24 + 97.65 + 154.28;
             }
@@ -88,21 +93,30 @@ namespace folhaDePagamento.Forms
 
         private void btnGerFolha_Click(object sender, EventArgs e)
         {
-
-            double salario = double.Parse(boxSalario.Text);
-            double inss = calculoInss(salario);
-            DateTime data1 = dateTimeFim.Value;
-            DateTime data2 = dateTimeInicio.Value;
-            gridCalc.AllowUserToAddRows = false;
-            gridTotal.AllowUserToAddRows = false;
-            double diferencaDias = (data1 - data2).Days;
-            double irrf = calculoIrrf(double.Parse(boxSalario.Text));
-            if (diferencaDias > 0)
+            try
             {
-                PopularDataGrip(salario, inss, irrf, diferencaDias);
+                ConnectDatabase conect = new ConnectDatabase();
+                double salario = double.Parse(boxSalario.Text);
+                double inss = calculoInss(salario);
+                DateTime data1 = dateTimeFim.Value;
+                DateTime data2 = dateTimeInicio.Value;
+                DateTime dataAtual = DateTime.Now;
+                string cpfFormatado = boxCpfFolha.Text.Replace(",", "").Replace("-", "");
+                string dataGerada = dataAtual.ToString("yyyy-MM-dd");
+                gridCalc.AllowUserToAddRows = false;
+                gridTotal.AllowUserToAddRows = false;
+                double diferencaDias = (data1 - data2).Days;
+                double irrf = calculoIrrf(double.Parse(boxSalario.Text));
+                if (diferencaDias > 0)
+                {
+                    PopularDataGrip(salario, inss, irrf, diferencaDias);
+                }
+                else { MessageBox.Show("Os dias trabalhados devem ser maiores do que zero."); }
+                CriarPDF();
+                double salarioLiquido = salario - inss - irrf;
+                insertFolha(salarioLiquido, salario, conect.queryIdFunc(cpfFormatado), inss, irrf, dataGerada);
             }
-            else { MessageBox.Show("Os dias trabalhados devem ser maiores do que zero.");}
-            CriarPDF();
+            catch (Exception ex) { MessageBox.Show($"Ocorreu um erro, revise as informações. {ex}"); }
 
         }
 
@@ -114,7 +128,7 @@ namespace folhaDePagamento.Forms
             }
             else if (salarioBase <= 2826.65)
             {
-                return (salarioBase * 0.075) -142.80;
+                return (salarioBase * 0.075) - 142.80;
             }
             else if (salarioBase <= 3751.05)
             {
@@ -133,35 +147,35 @@ namespace folhaDePagamento.Forms
         private void CriarPDF()
         {
 
-        if (gridCalc.Rows.Count > 0)
-        {
-            SaveFileDialog save = new SaveFileDialog();
-            save.Filter = "PDF (*.pdf)|*.pdf";
-            save.FileName = "Result.pdf";
-            
-            bool ErrorMessage = false;
-            if (save.ShowDialog() == DialogResult.OK)
+            if (gridCalc.Rows.Count > 0)
             {
-                if (File.Exists(save.FileName))
+                SaveFileDialog save = new SaveFileDialog();
+                save.Filter = "PDF (*.pdf)|*.pdf";
+                save.FileName = "Result.pdf";
+
+                bool ErrorMessage = false;
+                if (save.ShowDialog() == DialogResult.OK)
                 {
-                    try
+                    if (File.Exists(save.FileName))
                     {
-                        File.Delete(save.FileName);
+                        try
+                        {
+                            File.Delete(save.FileName);
+                        }
+                        catch (Exception ex)
+                        {
+                            ErrorMessage = true;
+                            MessageBox.Show("Unable to wride data in disk" + ex.Message);
+                        }
                     }
-                    catch (Exception ex)
+                    if (!ErrorMessage)
                     {
-                        ErrorMessage = true;
-                        MessageBox.Show("Unable to wride data in disk" + ex.Message);
-                    }
-                }
-                if (!ErrorMessage)
-                {
-                    try
-                    {
-                        PdfPTable pTable = new PdfPTable(gridCalc.Columns.Count);
-                        pTable.DefaultCell.Padding = 2;
-                        pTable.WidthPercentage = 100;
-                        pTable.HorizontalAlignment = Element.ALIGN_LEFT;
+                        try
+                        {
+                            PdfPTable pTable = new PdfPTable(gridCalc.Columns.Count);
+                            pTable.DefaultCell.Padding = 2;
+                            pTable.WidthPercentage = 100;
+                            pTable.HorizontalAlignment = Element.ALIGN_LEFT;
                             foreach (DataGridViewColumn col in gridCalc.Columns)
                             {
                                 PdfPCell pCell = new PdfPCell(new Phrase(col.HeaderText));
@@ -171,7 +185,7 @@ namespace folhaDePagamento.Forms
                             {
                                 foreach (DataGridViewCell dcell in viewRow.Cells)
                                 {
-                                   
+
                                     pTable.AddCell(dcell.Value.ToString());
                                 }
                             }
@@ -189,7 +203,7 @@ namespace folhaDePagamento.Forms
                             foreach (DataGridViewRow viewRow in gridTotal.Rows)
                             {
                                 foreach (DataGridViewCell dcell in viewRow.Cells)
-                                { 
+                                {
                                     pTable2.AddCell(dcell.Value.ToString());
                                 }
                             }
@@ -205,43 +219,47 @@ namespace folhaDePagamento.Forms
                                 fileStream.Close();
                             }
                             MessageBox.Show("PDF salvo com sucesso!", "info");
-                    }
-                    catch (Exception ex)
-                    {
-                        MessageBox.Show("Error while exporting Data" + ex);
+                        }
+                        catch (Exception ex)
+                        {
+                            MessageBox.Show("Error while exporting Data" + ex);
+                        }
                     }
                 }
             }
-        }
-        else
-        {
-            MessageBox.Show("No Record Found", "Info");
-        }
-            
+            else
+            {
+                MessageBox.Show("No Record Found", "Info");
+            }
+
         }
 
         public void PopularDataGrip(double salario, double inss, double irrf, double diferencaDias)
         {
-            double salarioDiv= salario / 30;
+            double salarioDiv = salario / 30;
             double salarioCompleto = salarioDiv * diferencaDias;
             gridCalc.Rows.Add("DIAS TRABALHADOS", diferencaDias, salarioCompleto, "");
             gridCalc.Rows.Add("DESCONTO DE INSS", "", "", inss.ToString("0.00"));
-            gridCalc.Rows.Add("DESCONTO DE I.R.F", irrf, "", irrf.ToString("0.00"));
+            gridCalc.Rows.Add("DESCONTO DE I.R.F", "", "", irrf.ToString("0.00"));
             gridCalc.Rows.Add("", "", "", "");
             gridCalc.Rows.Add("", "", "", "");
             gridCalc.Rows.Add("", "", "", "");
-            gridTotal.Rows.Add("Salário", 0, "", salario, salario, inss, (salarioCompleto-inss-irrf).ToString("0.00"));
-            gridTotal.Rows.Add("", "","","","","","");
-            gridTotal.Rows.Add("", "", "", "Valor do Fgts", "", "", "");
-            gridTotal.Rows.Add("", "", "", "0", "", "", "");
+            gridTotal.Rows.Add("Salário", 0, salario, salario, inss, (salarioCompleto - inss - irrf).ToString("0.00"));
+            gridTotal.Rows.Add("", "", "", "", "", "");
+
         }
-        //private void insertFolha()
-        //{
-        //    ConnectDatabase db = new ConnectDatabase();
-        //    MySqlCommand comm = db.connect().CreateCommand();
-        //    comm.CommandText = "INSERT INTO FOLHA VALUES (DEFAULT, @IDFUNCIONARIO, @SALARIOLQIUIDO, @SALARIOBRUTO, @FGTS, @VT, @CONVENIO, @IRRF, @INSS, @DESCFALTA);";
-        //    comm.Parameters.AddWithValue("@IDFUNCINOARIO", ),
-        //    comm.Parameters.AddWithValue("@SALARIOLQIUIDO, ")
-        //}
+        private void insertFolha(double salarioLiquido, double salarioBruto, string id, double inss, double irrf, string data_gerada)
+        {
+            ConnectDatabase db = new ConnectDatabase();
+            MySqlCommand comm = db.connect().CreateCommand();
+            comm.CommandText = "INSERT INTO FOLHA VALUES (DEFAULT, @IDFUNCIONARIO, @SALARIOLQIUIDO, @SALARIOBRUTO, @IRRF, @INSS, @DATA_GERADA);";
+            comm.Parameters.AddWithValue("@IDFUNCIONARIO", id);
+            comm.Parameters.AddWithValue("@SALARIOLQIUIDO", salarioLiquido);
+            comm.Parameters.AddWithValue("@SALARIOBRUTO", salarioBruto);
+            comm.Parameters.AddWithValue("@IRRF", irrf);
+            comm.Parameters.AddWithValue("@INSS", inss);
+            comm.Parameters.AddWithValue("@DATA_GERADA", data_gerada);
+            comm.ExecuteNonQuery();
+        }
     }
 }

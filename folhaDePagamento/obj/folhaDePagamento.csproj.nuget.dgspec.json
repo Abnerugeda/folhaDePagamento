@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\abner\\OneDrive\\Área de Trabalho\\Pim\\folhaDePagamento\\folhaDePagamento\\folhaDePagamento.csproj": {}
+    "C:\\Users\\Gabriel\\Documents\\folhaDePagamento\\folhaDePagamento\\folhaDePagamento.csproj": {}
   },
   "projects": {
-    "C:\\Users\\abner\\OneDrive\\Área de Trabalho\\Pim\\folhaDePagamento\\folhaDePagamento\\folhaDePagamento.csproj": {
+    "C:\\Users\\Gabriel\\Documents\\folhaDePagamento\\folhaDePagamento\\folhaDePagamento.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\abner\\OneDrive\\Área de Trabalho\\Pim\\folhaDePagamento\\folhaDePagamento\\folhaDePagamento.csproj",
+        "projectUniqueName": "C:\\Users\\Gabriel\\Documents\\folhaDePagamento\\folhaDePagamento\\folhaDePagamento.csproj",
         "projectName": "folhaDePagamento",
-        "projectPath": "C:\\Users\\abner\\OneDrive\\Área de Trabalho\\Pim\\folhaDePagamento\\folhaDePagamento\\folhaDePagamento.csproj",
-        "packagesPath": "C:\\Users\\abner\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\abner\\OneDrive\\Área de Trabalho\\Pim\\folhaDePagamento\\folhaDePagamento\\obj\\",
+        "projectPath": "C:\\Users\\Gabriel\\Documents\\folhaDePagamento\\folhaDePagamento\\folhaDePagamento.csproj",
+        "packagesPath": "C:\\Users\\Gabriel\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Gabriel\\Documents\\folhaDePagamento\\folhaDePagamento\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\abner\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Gabriel\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -76,7 +76,7 @@
               "privateAssets": "none"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.103\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.203\\RuntimeIdentifierGraph.json"
         }
       }
     }

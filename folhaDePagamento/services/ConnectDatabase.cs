@@ -19,7 +19,7 @@ namespace folhaDePagamento.services
         {
             try
             {
-                string strConexao = "server=localhost;uid=root;pwd=abnereei5;database=dbdepartamento";
+                string strConexao = "server=localhost;uid=root;pwd=123456;database=dbdepartamento";
                 MySqlConnection conexao = new MySqlConnection(strConexao);
                 conexao.Open();
                 return conexao;

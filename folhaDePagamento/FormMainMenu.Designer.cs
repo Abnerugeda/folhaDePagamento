@@ -32,7 +32,6 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormMainMenu));
             panelMenu = new Panel();
             iconButton5 = new FontAwesome.Sharp.IconButton();
-            iconButton4 = new FontAwesome.Sharp.IconButton();
             iconButton3 = new FontAwesome.Sharp.IconButton();
             iconButton2 = new FontAwesome.Sharp.IconButton();
             iconButton1 = new FontAwesome.Sharp.IconButton();
@@ -56,7 +55,6 @@
             // 
             panelMenu.BackColor = Color.FromArgb(31, 30, 60);
             panelMenu.Controls.Add(iconButton5);
-            panelMenu.Controls.Add(iconButton4);
             panelMenu.Controls.Add(iconButton3);
             panelMenu.Controls.Add(iconButton2);
             panelMenu.Controls.Add(iconButton1);
@@ -79,7 +77,7 @@
             iconButton5.IconFont = FontAwesome.Sharp.IconFont.Auto;
             iconButton5.IconSize = 32;
             iconButton5.ImageAlign = ContentAlignment.MiddleLeft;
-            iconButton5.Location = new Point(0, 380);
+            iconButton5.Location = new Point(0, 320);
             iconButton5.Name = "iconButton5";
             iconButton5.Padding = new Padding(10, 0, 20, 0);
             iconButton5.Size = new Size(220, 60);
@@ -89,28 +87,6 @@
             iconButton5.TextImageRelation = TextImageRelation.ImageBeforeText;
             iconButton5.UseVisualStyleBackColor = true;
             iconButton5.Click += iconButton5_Click;
-            // 
-            // iconButton4
-            // 
-            iconButton4.Dock = DockStyle.Top;
-            iconButton4.FlatAppearance.BorderSize = 0;
-            iconButton4.FlatStyle = FlatStyle.Flat;
-            iconButton4.ForeColor = SystemColors.ButtonFace;
-            iconButton4.IconChar = FontAwesome.Sharp.IconChar.Gears;
-            iconButton4.IconColor = Color.Gainsboro;
-            iconButton4.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            iconButton4.IconSize = 32;
-            iconButton4.ImageAlign = ContentAlignment.MiddleLeft;
-            iconButton4.Location = new Point(0, 320);
-            iconButton4.Name = "iconButton4";
-            iconButton4.Padding = new Padding(10, 0, 20, 0);
-            iconButton4.Size = new Size(220, 60);
-            iconButton4.TabIndex = 4;
-            iconButton4.Text = "Configurações";
-            iconButton4.TextAlign = ContentAlignment.MiddleLeft;
-            iconButton4.TextImageRelation = TextImageRelation.ImageBeforeText;
-            iconButton4.UseVisualStyleBackColor = true;
-            iconButton4.Click += iconButton4_Click;
             // 
             // iconButton3
             // 
@@ -172,7 +148,7 @@
             iconButton1.Padding = new Padding(10, 0, 20, 0);
             iconButton1.Size = new Size(220, 60);
             iconButton1.TabIndex = 1;
-            iconButton1.Text = "DashBoard";
+            iconButton1.Text = "Visualizar Folha";
             iconButton1.TextAlign = ContentAlignment.MiddleLeft;
             iconButton1.TextImageRelation = TextImageRelation.ImageBeforeText;
             iconButton1.UseVisualStyleBackColor = true;
@@ -240,7 +216,7 @@
             // pictureBox1
             // 
             pictureBox1.BackgroundImage = (Image)resources.GetObject("pictureBox1.BackgroundImage");
-            pictureBox1.Location = new Point(250, 125);
+            pictureBox1.Location = new Point(235, 125);
             pictureBox1.Name = "pictureBox1";
             pictureBox1.Size = new Size(321, 140);
             pictureBox1.TabIndex = 1;
@@ -252,7 +228,7 @@
             lblData.AutoSize = true;
             lblData.Font = new Font("Segoe UI", 30F, FontStyle.Regular, GraphicsUnit.Point);
             lblData.ForeColor = SystemColors.ButtonShadow;
-            lblData.Location = new Point(184, 377);
+            lblData.Location = new Point(147, 380);
             lblData.Name = "lblData";
             lblData.Size = new Size(130, 54);
             lblData.TabIndex = 0;
@@ -264,7 +240,7 @@
             lblHorario.AutoSize = true;
             lblHorario.Font = new Font("Segoe UI", 40F, FontStyle.Regular, GraphicsUnit.Point);
             lblHorario.ForeColor = Color.Gainsboro;
-            lblHorario.Location = new Point(320, 305);
+            lblHorario.Location = new Point(283, 308);
             lblHorario.Name = "lblHorario";
             lblHorario.Size = new Size(172, 72);
             lblHorario.TabIndex = 0;
@@ -303,7 +279,6 @@
 
         private Panel panelMenu;
         private FontAwesome.Sharp.IconButton iconButton5;
-        private FontAwesome.Sharp.IconButton iconButton4;
         private FontAwesome.Sharp.IconButton iconButton3;
         private FontAwesome.Sharp.IconButton iconButton2;
         private FontAwesome.Sharp.IconButton iconButton1;

@@ -26,7 +26,7 @@ namespace folhaDePagamento.Forms
                 FormMainMenu formMain = new FormMainMenu();
                 formMain.Show();
                 this.Hide();
-                
+
             }
             else
             {
