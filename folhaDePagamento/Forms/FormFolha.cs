@@ -90,21 +90,45 @@ namespace folhaDePagamento.Forms
         {
 
             double salario = double.Parse(boxSalario.Text);
-            double fgts = calculoInss(salario);
+            double inss = calculoInss(salario);
             DateTime data1 = dateTimeFim.Value;
             DateTime data2 = dateTimeInicio.Value;
             gridCalc.AllowUserToAddRows = false;
             gridTotal.AllowUserToAddRows = false;
-            int diferencaDias = (data1 - data2).Days;
-            PopularDataGrip(salario, fgts, 0, diferencaDias);
+            double diferencaDias = (data1 - data2).Days;
+            double irrf = calculoIrrf(double.Parse(boxSalario.Text));
+            if (diferencaDias > 0)
+            {
+                PopularDataGrip(salario, inss, irrf, diferencaDias);
+            }
+            else { MessageBox.Show("Os dias trabalhados devem ser maiores do que zero.");}
             CriarPDF();
 
         }
 
-        //private double calculoIrrf(double salarioBruto, int numeroDependentes)
-        //{
-        //    return salarioBruto - calculoInss(salarioBruto) - 
-        //}
+        private double calculoIrrf(double salarioBase)
+        {
+            if (salarioBase <= 1903.98)
+            {
+                return 0;
+            }
+            else if (salarioBase <= 2826.65)
+            {
+                return (salarioBase * 0.075) -142.80;
+            }
+            else if (salarioBase <= 3751.05)
+            {
+                return (salarioBase * 0.15) - 354.80;
+            }
+            else if (salarioBase <= 4664.68)
+            {
+                return (salarioBase * 0.225) - 636.13;
+            }
+            else
+            {
+                return (salarioBase * 0.275) - 869.36;
+            }
+        }
 
         private void CriarPDF()
         {
@@ -196,18 +220,20 @@ namespace folhaDePagamento.Forms
             
         }
 
-        public void PopularDataGrip(double salario, double inss, double irrf, int diferencaDias)
+        public void PopularDataGrip(double salario, double inss, double irrf, double diferencaDias)
         {
-            gridCalc.Rows.Add("DIAS TRABALHADOS", diferencaDias, salario, "");
+            double salarioDiv= salario / 30;
+            double salarioCompleto = salarioDiv * diferencaDias;
+            gridCalc.Rows.Add("DIAS TRABALHADOS", diferencaDias, salarioCompleto, "");
             gridCalc.Rows.Add("DESCONTO DE INSS", "", "", inss.ToString("0.00"));
             gridCalc.Rows.Add("DESCONTO DE I.R.F", irrf, "", irrf.ToString("0.00"));
             gridCalc.Rows.Add("", "", "", "");
             gridCalc.Rows.Add("", "", "", "");
             gridCalc.Rows.Add("", "", "", "");
-            gridTotal.Rows.Add("Salário", 0, "", salario, salario, inss, (salario-inss).ToString("0.00"));
-            gridTotal.Rows.Add("Férias", "","","","","","");
-            gridTotal.Rows.Add("13º Salário", "", "", "Valor do Fgts", "", "", "");
-            gridTotal.Rows.Add("Av.Prévio", "", "", "0", "", "", "");
+            gridTotal.Rows.Add("Salário", 0, "", salario, salario, inss, (salarioCompleto-inss-irrf).ToString("0.00"));
+            gridTotal.Rows.Add("", "","","","","","");
+            gridTotal.Rows.Add("", "", "", "Valor do Fgts", "", "", "");
+            gridTotal.Rows.Add("", "", "", "0", "", "", "");
         }
         //private void insertFolha()
         //{

@@ -37,13 +37,6 @@
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.comboPeriodo = new System.Windows.Forms.ComboBox();
-            this.checkInss = new System.Windows.Forms.CheckBox();
-            this.label7 = new System.Windows.Forms.Label();
-            this.comboAvPrevio = new System.Windows.Forms.ComboBox();
-            this.label6 = new System.Windows.Forms.Label();
-            this.boxDataDemissao = new System.Windows.Forms.MaskedTextBox();
-            this.boxData = new System.Windows.Forms.MaskedTextBox();
-            this.label8 = new System.Windows.Forms.Label();
             this.btnGerFolha = new FontAwesome.Sharp.IconButton();
             this.label9 = new System.Windows.Forms.Label();
             this.boxCpfFolha = new System.Windows.Forms.MaskedTextBox();
@@ -150,75 +143,6 @@
             this.comboPeriodo.Name = "comboPeriodo";
             this.comboPeriodo.Size = new System.Drawing.Size(109, 23);
             this.comboPeriodo.TabIndex = 7;
-            // 
-            // checkInss
-            // 
-            this.checkInss.AutoSize = true;
-            this.checkInss.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.checkInss.ForeColor = System.Drawing.Color.White;
-            this.checkInss.Location = new System.Drawing.Point(119, 110);
-            this.checkInss.Name = "checkInss";
-            this.checkInss.Size = new System.Drawing.Size(115, 42);
-            this.checkInss.TabIndex = 13;
-            this.checkInss.Text = " Recolheu Inss\r\n S/13º Salário";
-            this.checkInss.UseVisualStyleBackColor = true;
-            // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label7.ForeColor = System.Drawing.Color.White;
-            this.label7.Location = new System.Drawing.Point(239, 103);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(118, 15);
-            this.label7.TabIndex = 15;
-            this.label7.Text = "Av. Prévio Adiantado";
-            // 
-            // comboAvPrevio
-            // 
-            this.comboAvPrevio.FormattingEnabled = true;
-            this.comboAvPrevio.Location = new System.Drawing.Point(240, 121);
-            this.comboAvPrevio.Name = "comboAvPrevio";
-            this.comboAvPrevio.Size = new System.Drawing.Size(109, 23);
-            this.comboAvPrevio.TabIndex = 14;
-            // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.ForeColor = System.Drawing.Color.White;
-            this.label6.Location = new System.Drawing.Point(12, 103);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(101, 15);
-            this.label6.TabIndex = 11;
-            this.label6.Text = "Data de Demissão";
-            // 
-            // boxDataDemissao
-            // 
-            this.boxDataDemissao.Location = new System.Drawing.Point(14, 121);
-            this.boxDataDemissao.Mask = "00/00/0000";
-            this.boxDataDemissao.Name = "boxDataDemissao";
-            this.boxDataDemissao.Size = new System.Drawing.Size(100, 23);
-            this.boxDataDemissao.TabIndex = 12;
-            this.boxDataDemissao.ValidatingType = typeof(System.DateTime);
-            // 
-            // boxData
-            // 
-            this.boxData.Location = new System.Drawing.Point(363, 121);
-            this.boxData.Mask = "00/00/0000";
-            this.boxData.Name = "boxData";
-            this.boxData.Size = new System.Drawing.Size(100, 23);
-            this.boxData.TabIndex = 17;
-            this.boxData.ValidatingType = typeof(System.DateTime);
-            // 
-            // label8
-            // 
-            this.label8.AutoSize = true;
-            this.label8.ForeColor = System.Drawing.Color.White;
-            this.label8.Location = new System.Drawing.Point(363, 103);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(80, 15);
-            this.label8.TabIndex = 16;
-            this.label8.Text = "Data do Aviso";
             // 
             // btnGerFolha
             // 
@@ -467,13 +391,6 @@
             this.Controls.Add(this.boxCpfFolha);
             this.Controls.Add(this.label9);
             this.Controls.Add(this.btnGerFolha);
-            this.Controls.Add(this.boxData);
-            this.Controls.Add(this.label8);
-            this.Controls.Add(this.label7);
-            this.Controls.Add(this.comboAvPrevio);
-            this.Controls.Add(this.checkInss);
-            this.Controls.Add(this.boxDataDemissao);
-            this.Controls.Add(this.label6);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.comboPeriodo);
             this.Controls.Add(this.boxSalario);
@@ -501,13 +418,6 @@
         private Label label3;
         private Label label4;
         private ComboBox comboPeriodo;
-        private CheckBox checkInss;
-        private Label label7;
-        private ComboBox comboAvPrevio;
-        private Label label6;
-        private MaskedTextBox boxDataDemissao;
-        private MaskedTextBox boxData;
-        private Label label8;
         private FontAwesome.Sharp.IconButton btnGerFolha;
         private Label label9;
         private MaskedTextBox boxCpfFolha;

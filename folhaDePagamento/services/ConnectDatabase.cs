@@ -19,7 +19,7 @@ namespace folhaDePagamento.services
         {
             try
             {
-                string strConexao = "server=localhost;uid=root;pwd=123456;database=dbdepartamento";
+                string strConexao = "server=localhost;uid=root;pwd=abnereei5;database=dbdepartamento";
                 MySqlConnection conexao = new MySqlConnection(strConexao);
                 conexao.Open();
                 return conexao;
@@ -119,7 +119,7 @@ namespace folhaDePagamento.services
             comm.Parameters.AddWithValue("@COMPLEMENTO", complemento);
             comm.Parameters.AddWithValue("@MUNICIPIO", municipio);
             comm.Parameters.AddWithValue("@UF", uf);
-            comm.Parameters.AddWithValue("CEP", cep);
+            comm.Parameters.AddWithValue("@CEP", cep);
             comm.ExecuteNonQuery();
         }
         public void insertSalario(string salario, string cpf, string dataAdmissao, string cargo)
@@ -227,7 +227,7 @@ namespace folhaDePagamento.services
 
                 while (reader.Read())
                 {
-                    MessageBox.Show(BCrypt.Net.BCrypt.Verify(senha, reader["SENHA"].ToString()).ToString());
+
                     if (reader["LOGIN"].ToString().ToLower() == usuario.ToLower() && BCrypt.Net.BCrypt.Verify(senha, reader["SENHA"].ToString()))
                     {
                         return true;
